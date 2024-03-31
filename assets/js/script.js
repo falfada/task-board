@@ -7,16 +7,18 @@ function generateTaskId() {}
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-  const taskTitle = $("#taskTitle").val();
-  const taskDueDate = $("#taskDueDate").val();
-  const taskDescription = $("#taskDescription").val();
+  const taskTitle = $("#taskTitle");
+  const taskDueDate = $("#taskDueDate");
+  const taskDescription = $("#taskDescription");
   const taskInfo = {
-    tasktTitle: taskTitle,
-    taskDueDate: taskDueDate,
-    taskDescription: taskDescription,
+    tasktTitle: taskTitle.val(),
+    taskDueDate: taskDueDate.val(),
+    taskDescription: taskDescription.val(),
   };
-
-  console.log(taskInfo);
+  taskTitle.val("");
+  taskDueDate.val("");
+  taskDescription.val("");
+  
 }
 
 // Todo: create a function to render the task list and make cards draggable
