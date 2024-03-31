@@ -14,3 +14,7 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+.custom-modal-footer{
+  justify-content: center;
+  border-top: none;
+}
