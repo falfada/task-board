@@ -1,6 +1,7 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
+const swimLanes = $('.swim-lanes');
 
 // Todo: create a function to generate a unique task id
 
@@ -62,7 +63,6 @@ function handleAddTask(event) {
   const taskDescription = $("#taskDescription");
 
   const newTask = {
-    // ? Here we use a tool called `crypto` to generate a random id for our project. This is a unique identifier that we can use to find the project in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.
     id: generateTaskId(),
     title: taskTitle.val(),
     description: taskDescription.val(),
@@ -94,8 +94,21 @@ function handleAddTask(event) {
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
-  const cardContainer = event.target.parentElement.parentElement;
-  console.log(parent);
+  event.preventDefault();
+
+  const cardId = parseInt($(this).attr('data-project-id'));
+  const tasks = taskList;
+
+  for (let i = 0; i < tasks.length; i++) {
+    const card = tasks[i];
+    if(card.id === cardId){
+      tasks.splice(i, 1);
+    }
+  }
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  $(this).parent().parent().remove();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -108,8 +121,7 @@ $(document).ready(function () {
 
   // Event Listener
   $("#newTaskButton").on("click", handleAddTask);
-  // Add event listener to handleDeleteTask
-  $(".delete").on("click", handleDeleteTask);
+  $(swimLanes).on("click", ".delete", handleDeleteTask);
 
   // Due Date datepicker
   $("#taskDueDate").datepicker({
