@@ -116,6 +116,7 @@ function handleAddTask(event) {
   }
 
   tasks.push(newTask);
+  taskList = tasks;
 
 // Storing information in local storage
   localStorage.setItem("tasks", JSON.stringify(tasks));
